@@ -128,6 +128,16 @@ def every_word(word_func):
     """Apply one function to every word."""
     return lambda i, word, _: word_func(word)
 
+def smart_capitalize(w):
+    """If word is already all caps, don't change anything."""
+    if w == "id":
+        return "ID"
+    if w.isupper():
+        return w
+    else:
+        return w.capitalize()
+
+
 
 # All formatters (code and prose)
 formatters_dict = {
@@ -135,13 +145,13 @@ formatters_dict = {
     "DOUBLE_UNDERSCORE": (NOSEP, first_vs_rest(lambda w: f"__{w}__")),
     "PRIVATE_CAMEL_CASE": (
         NOSEP,
-        first_vs_rest(lambda w: w.lower(), lambda w: w.capitalize()),
+        first_vs_rest(lambda w: w.lower(), lambda w: smart_capitalize(w)),
     ),
     "PROTECTED_CAMEL_CASE": (
         NOSEP,
-        first_vs_rest(lambda w: w.lower(), lambda w: w.capitalize()),
+        first_vs_rest(lambda w: w.lower(), lambda w: smart_capitalize(w)),
     ),
-    "PUBLIC_CAMEL_CASE": (NOSEP, every_word(lambda w: w.capitalize())),
+    "PUBLIC_CAMEL_CASE": (NOSEP, every_word(lambda w: smart_capitalize(w))),
     "SNAKE_CASE": (
         NOSEP,
         first_vs_rest(lambda w: w.lower(), lambda w: "_" + w.lower()),
