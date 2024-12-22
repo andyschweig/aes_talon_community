@@ -179,7 +179,12 @@ def capitalize_first(text: str) -> str:
 
 
 def capitalize(text: str) -> str:
-    return text.capitalize()
+    if text.isupper():
+        return text
+    elif text == "id":
+        return "ID"
+    else:
+        return text.capitalize()
 
 
 def lower(text: str) -> str:
