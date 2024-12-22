@@ -1,0 +1,15 @@
+list: user.system_paths
+hostname: imac
+-
+user: /Users/andy
+profile: /Users/andy
+desktop: /Users/andy/Desktop
+desk: /Users/andy/Desktop
+documents: /Users/andy/Documents
+docks: /Users/andy/Documents
+downloads: /Users/andy/Downloads
+music: /Users/andy/Music
+pictures: /Users/andy/Pictures
+videos: /Users/andy/Videos
+talon home: /Users/andy/.talon
+talon user: /Users/andy/.talon/user
