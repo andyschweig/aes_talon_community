@@ -61,6 +61,13 @@ class CodeFormatter(Formatter):
     def unformat(self, text: str) -> str:
         return remove_code_formatting(text)
 
+    # XXX See if this can be done using a talon list.
+    words_to_replace = {
+        'knew': 'new',
+        'scene': 'seen',
+        'scent': 'sent',
+    }
+
     def _format_delim(
         self,
         text: str,
@@ -77,6 +84,8 @@ class CodeFormatter(Formatter):
         first = True
 
         for word in words:
+            if word in self.words_to_replace:
+                word = self.words_to_replace[word]
             if word.isspace():
                 continue
             # Word is number
