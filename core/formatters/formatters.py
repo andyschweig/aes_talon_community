@@ -64,6 +64,7 @@ class CodeFormatter(Formatter):
     # XXX See if this can be done using a talon list.
     words_to_replace = {
         'knew': 'new',
+        'numb': 'num',
         'scene': 'seen',
         'scent': 'sent',
     }
@@ -188,12 +189,7 @@ def capitalize_first(text: str) -> str:
 
 
 def capitalize(text: str) -> str:
-    if text.isupper():
-        return text
-    elif text == "id":
-        return "ID"
-    else:
-        return text.capitalize()
+    return text.capitalize()
 
 
 def lower(text: str) -> str:
@@ -250,6 +246,8 @@ formatter_list = [
     CodeFormatter("NO_SPACES", "", lower, lower),
     CodeFormatter("PRIVATE_CAMEL_CASE", "", lower, capitalize),
     CodeFormatter("PUBLIC_CAMEL_CASE", "", capitalize, capitalize),
+    CodeFormatter("ALT_PRIVATE_CAMEL_CASE", "", lower, capitalize_first),
+    CodeFormatter("ALT_PUBLIC_CAMEL_CASE", "", capitalize_first, capitalize_first),
     CodeFormatter("SNAKE_CASE", "_", lower, lower),
     CodeFormatter("DASH_SEPARATED", "-", lower, lower),
     CodeFormatter("DOT_SEPARATED", ".", lower, lower),
