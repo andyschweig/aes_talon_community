@@ -61,14 +61,6 @@ class CodeFormatter(Formatter):
     def unformat(self, text: str) -> str:
         return remove_code_formatting(text)
 
-    # XXX See if this can be done using a talon list.
-    words_to_replace = {
-        'knew': 'new',
-        'numb': 'num',
-        'scene': 'seen',
-        'scent': 'sent',
-    }
-
     def _format_delim(
         self,
         text: str,
@@ -76,6 +68,10 @@ class CodeFormatter(Formatter):
         format_first: Callable[[str], str],
         format_rest: Callable[[str], str],
     ):
+        words_to_replace = actions.user.talon_get_active_registry_list(
+            "user.code_words_to_replace"
+        )
+
         # Strip anything that is not alpha-num, whitespace, dot or comma
         text = re.sub(r"[^\w\d\s.,]+", "", text)
         # Split on anything that is not alpha-num
@@ -85,8 +81,8 @@ class CodeFormatter(Formatter):
         first = True
 
         for word in words:
-            if word in self.words_to_replace:
-                word = self.words_to_replace[word]
+            if word in words_to_replace:
+                word = words_to_replace[word]
             if word.isspace():
                 continue
             # Word is number
@@ -266,6 +262,7 @@ mod.list(
     "prose_formatter", desc="list of prose formatters (words to start dictating prose)"
 )
 mod.list("word_formatter", "List of word formatters")
+mod.list("code_words_to_replace", desc="List of words to replace in code formatters")
 
 # The last phrase spoken, without & with formatting. Used for reformatting.
 last_phrase = ""
