@@ -67,8 +67,6 @@ operators = Operators(
     BITWISE_EXCLUSIVE_OR=" ^ ",
     BITWISE_LEFT_SHIFT=" << ",
     BITWISE_RIGHT_SHIFT=" >> ",
-    # code_operators_lambda
-    LAMBDA=" -> ",
     # code_operators_math
     MATH_ADD=" + ",
     MATH_SUBTRACT=" - ",
@@ -79,7 +77,6 @@ operators = Operators(
     MATH_NOT_EQUAL=" != ",
     MATH_OR=" || ",
     MATH_AND=" && ",
-    MATH_EXPONENT=" ^ ",
     MATH_GREATER_THAN=" > ",
     MATH_LESS_THAN=" < ",
     MATH_GREATER_THAN_OR_EQUAL=" >= ",
@@ -126,6 +123,16 @@ class UserActions:
         result = "func {}".format(
             actions.user.formatted_text(
                 text, settings.get("user.code_private_function_formatter")
+            )
+        )
+
+        actions.user.code_insert_function(result, None)
+
+    def code_public_function(text: str):
+        """Inserts public function declaration"""
+        result = "func {}".format(
+            actions.user.formatted_text(
+                text, settings.get("user.code_public_function_formatter")
             )
         )
 
