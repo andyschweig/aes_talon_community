@@ -4,8 +4,16 @@ code.language: go
 
 # golang builtin functions
 append
+cap
+close
+copy
+delete
 length: len
 make
+new
+panic
+recover
+
 # formatting
 format print: fmt.Printf
 format print eff: fmt.Printf

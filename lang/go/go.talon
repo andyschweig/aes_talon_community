@@ -13,7 +13,6 @@ tag(): user.code_libraries
 tag(): user.code_operators_array
 tag(): user.code_operators_assignment
 tag(): user.code_operators_bitwise
-tag(): user.code_operators_lambda
 tag(): user.code_operators_math
 tag(): user.code_operators_pointer
 
@@ -23,7 +22,7 @@ settings():
     user.code_public_function_formatter = "PUBLIC_CAMEL_CASE"
     user.code_private_variable_formatter = "PRIVATE_CAMEL_CASE"
     user.code_protected_variable_formatter = "PRIVATE_CAMEL_CASE"
-    user.code_public_variable_formatter = "PRIVATE_CAMEL_CASE"
+    user.code_public_variable_formatter = "PUBLIC_CAMEL_CASE"
 
 (variadic | spread): "..."
 declare: " := "
@@ -36,3 +35,25 @@ channel (receive | send): " <- "
 [state] if not (err | error):
     insert("if err == nil {")
     key("enter")
+
+[state] defer:
+    insert("defer ")
+
+state go:
+    insert("go ")
+
+[state] select:
+    insert("select {")
+    key("enter")
+
+[state] type:
+    insert("type ")
+
+[state] var:
+    insert("var ")
+
+[state] const:
+    insert("const ")
+
+[state] func:
+    insert("func ")
